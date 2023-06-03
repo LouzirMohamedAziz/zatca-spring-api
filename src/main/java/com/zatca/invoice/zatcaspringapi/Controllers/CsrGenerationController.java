@@ -1,11 +1,14 @@
 package com.zatca.invoice.zatcaspringapi.Controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zatca.invoice.zatcaspringapi.Services.CSRequestService;
 import com.zatca.sdk.service.CsrGenerationService;
 
 @RequestMapping("/invoice")
@@ -13,30 +16,37 @@ import com.zatca.sdk.service.CsrGenerationService;
 public class CsrGenerationController {
 
     CsrGenerationService csrGenerationService;
-    CSRequestService csrRequestService;
-
+    
     @PostMapping()
-    public Boolean load() {
-        return csrGenerationService.loadInput();
-    }
+    public String generateCSR(String csrConfigFilePath, String csrConfigFileName) {
+        
+        String line;
 
-    @PostMapping()
-    public Boolean validate() {
-        return csrGenerationService.validateInput();
-    }
+		try {
 
-    @PostMapping()
-    public Boolean process() {
-        return csrGenerationService.process();
-    }
+			Runtime rt = Runtime.getRuntime();
+			String command = "bash -c 'cd " + csrConfigFilePath + " && fatoora -csr -csrConfig " + csrConfigFileName + "'";
+            Process pr = rt.exec(command);
+            InputStream inputStream = pr.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
 
-    @PostMapping()
-    public void generateCSR(String privateKeyFile) {
-        csrRequestService.generateCSR(privateKeyFile);
-    }
+            try {
+                int exitCode = pr.waitFor();
+                System.out.println("Exit Code:" + exitCode);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-    @GetMapping()
-    public Boolean generate() {
-        return csrGenerationService.generateOutput();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+        return "CsrGenerationService - csr and private key have been generated successfully. ";
+
+        }
     }
-}

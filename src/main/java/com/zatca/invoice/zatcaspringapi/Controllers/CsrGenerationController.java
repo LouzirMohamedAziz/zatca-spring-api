@@ -8,34 +8,34 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zatca.invoice.zatcaspringapi.Services.CSRequestService;
 import com.zatca.sdk.service.CsrGenerationService;
 
-@RequestMapping("/invoice/CSR")
+@RequestMapping("/invoice")
 @RestController
 public class CsrGenerationController {
 
     CsrGenerationService csrGenerationService;
     CSRequestService csrRequestService;
 
-    @PostMapping("/load")
+    @PostMapping()
     public Boolean load() {
         return csrGenerationService.loadInput();
     }
 
-    @PostMapping("/validate")
+    @PostMapping()
     public Boolean validate() {
         return csrGenerationService.validateInput();
     }
 
-    @PostMapping("/process")
+    @PostMapping()
     public Boolean process() {
         return csrGenerationService.process();
     }
 
-    @PostMapping("generate")
+    @PostMapping()
     public void generateCSR(String privateKeyFile) {
         csrRequestService.generateCSR(privateKeyFile);
     }
 
-    @GetMapping("/generate")
+    @GetMapping()
     public Boolean generate() {
         return csrGenerationService.generateOutput();
     }

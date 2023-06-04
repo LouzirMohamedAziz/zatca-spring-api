@@ -28,23 +28,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.zatca.invoice</groupId>
   			<artifactId>zatca-einvoicing-sdk</artifactId>
  			<version>234-R3.2.0</version>
  			<scope>system</scope>
-			<systemPath>/Users/louzir/Documents/Spring/zatca-sdk/zatca-einvoicing-sdk-234-R3.2.0/Apps/zatca-einvoicing-sdk-234-R3.2.0.jar</systemPath>
+			<systemPath>/Users/louzir/Pictures/zatca-spring-api/lib/zatca-einvoicing-sdk-234-R3.2.0/Apps/zatca-einvoicing-sdk-234-R3.2.0.jar</systemPath>
+			<exclusions>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+			</exclusion>
+			<exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+            </exclusion>
+			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>
 				org.springframework.boot
@@ -53,8 +67,23 @@
 				spring-boot-starter-data-jpa
 			</artifactId>
 		</dependency>
-
 	</dependencies>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.3.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>6.0.8</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 
 
 	<build>

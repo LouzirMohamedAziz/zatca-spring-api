@@ -1,34 +1,47 @@
 package com.zatca.invoice.zatcaspringapi.Controllers;
 
-import java.security.cert.X509Certificate;
-
+import org.apache.logging.log4j.core.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
-import com.zatca.sdk.service.QrGenerationService;
+import com.zatca.invoice.zatcaspringapi.Models.Qr;
+import com.zatca.invoice.zatcaspringapi.Services.QrService;
 
-@RequestMapping("/invoice/qr")
+
+@RequestMapping("/invoice")
 @RestController
 public class QrGenerationController {
 
-    QrGenerationService qrGenerationService;
-
-    @PostMapping()
-    public String createQRCode(@RequestBody String xmlContent) {
-        return qrGenerationService.generateQrCode(xmlContent);
+    private final QrService qrService;
+    Logger log;
+    
+    public QrGenerationController(QrService qrService) {
+        this.qrService = qrService;
     }
 
-
-    @PostMapping("/hash")
-    public String invoiceHash(@RequestBody String xmlContent) {
-        return qrGenerationService.getInvoiceHash(xmlContent);
+    @PostMapping("/qr")
+    public String createQRCode(@RequestBody Qr qr) {
+        try {
+            qrService.generateQRCODE(qr);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            HttpStatus statusCode = e.getStatusCode();
+            String responseBody = e.getResponseBodyAsString();
+            if (statusCode.is4xxClientError()) {
+                log.error("Client error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+            } else if (statusCode.is5xxServerError()) {
+                log.error("Server error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+            } else {
+                log.error("HTTP error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+            }
+        } catch (Exception e) {
+            log.error("An unexpected error occurred during QR generation", e);
+        }
+        return "QR code generated successsfuly!";
     }
 
-    @PostMapping("/certificate")
-    public X509Certificate getCertificate(@RequestBody String certificate){
-        return (X509Certificate) qrGenerationService.extractQrData(certificate);
-
-    }
 }

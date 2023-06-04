@@ -27,7 +27,7 @@ public class signInvoiceController {
     }
 
 
-    @PostMapping()
+    @PostMapping("/sign")
     public String signInvoice(@RequestBody InvoiceRequest invoiceRequest){
         try {
             invoiceSignService.generateSignedInvoice(invoiceRequest);

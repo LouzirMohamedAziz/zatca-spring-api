@@ -1,52 +1,52 @@
-package com.zatca.invoice.zatcaspringapi.Controllers;
+// package com.zatca.invoice.zatcaspringapi.Controllers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+// import java.io.BufferedReader;
+// import java.io.IOException;
+// import java.io.InputStream;
+// import java.io.InputStreamReader;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RestController;
 
-import com.zatca.sdk.service.CsrGenerationService;
+// import com.zatca.sdk.service.CsrGenerationService;
 
-@RequestMapping("/invoice")
-@RestController
-public class CsrGenerationController {
+// @RequestMapping("/invoice")
+// @RestController
+// public class CsrGenerationController {
 
-    CsrGenerationService csrGenerationService;
+//     CsrGenerationService csrGenerationService;
     
-    @PostMapping()
-    public String generateCSR(String csrConfigFilePath, String csrConfigFileName) {
+//     @PostMapping()
+//     public String generateCSR(String csrConfigFilePath, String csrConfigFileName) {
         
-        String line;
+//         String line;
 
-		try {
+// 		try {
 
-			Runtime rt = Runtime.getRuntime();
-			String command = "bash -c 'cd " + csrConfigFilePath + " && fatoora -csr -csrConfig " + csrConfigFileName + "'";
-            Process pr = rt.exec(command);
-            InputStream inputStream = pr.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
+// 			Runtime rt = Runtime.getRuntime();
+// 			String command = "bash -c 'cd " + csrConfigFilePath + " && fatoora -csr -csrConfig " + csrConfigFileName + "'";
+//             Process pr = rt.exec(command);
+//             InputStream inputStream = pr.getInputStream();
+//             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//             while ((line = reader.readLine()) != null) {
+//                 System.out.println(line);
+//             }
 
-            try {
-                int exitCode = pr.waitFor();
-                System.out.println("Exit Code:" + exitCode);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//             try {
+//                 int exitCode = pr.waitFor();
+//                 System.out.println("Exit Code:" + exitCode);
+//             } catch (InterruptedException e) {
+//                 e.printStackTrace();
+//             }
 
-		} catch (IOException e) {
+// 		} catch (IOException e) {
 
-			e.printStackTrace();
+// 			e.printStackTrace();
 
-		}
+// 		}
 
-        return "CsrGenerationService - csr and private key have been generated successfully. ";
+//         return "CsrGenerationService - csr and private key have been generated successfully. ";
 
-        }
-    }
+//         }
+//     }

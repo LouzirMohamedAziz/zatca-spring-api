@@ -4,6 +4,8 @@ import java.util.Objects;
 public class ComplianceResponse {
 
     ValidationResults validationResults;
+    WarningMessages warningMessages;
+    ErrorMessages errorMessages;
     String reportingStatus;
     String clearanceStatus;
     String qrSellertStatus;

@@ -20,10 +20,7 @@ public class ZatcaSpringApiApplication implements CommandLineRunner{
 
 	private static Logger log;
 	public static void main(String[] args) {
-
 		SpringApplication.run(ZatcaSpringApiApplication.class, args);
-
-		
         }
 
 @Override

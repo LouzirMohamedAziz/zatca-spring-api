@@ -14,20 +14,20 @@ import org.springframework.web.client.HttpServerErrorException;
 import com.zatca.invoice.zatcaspringapi.Models.InvoiceRequest;
 import com.zatca.invoice.zatcaspringapi.Services.InvoiceSignService;
 
-@RequestMapping("/invoice")
+@RequestMapping("/sign")
 @RestController
-public class signInvoiceController {
+public class SignInvoiceController {
 
     private final InvoiceSignService invoiceSignService;
     Logger log;
 
     @Autowired
-    public signInvoiceController(InvoiceSignService invoiceSignService) {
+    public SignInvoiceController(InvoiceSignService invoiceSignService) {
         this.invoiceSignService = invoiceSignService;
     }
 
 
-    @PostMapping("/sign")
+    @PostMapping()
     public String signInvoice(@RequestBody InvoiceRequest invoiceRequest){
         try {
             invoiceSignService.generateSignedInvoice(invoiceRequest);

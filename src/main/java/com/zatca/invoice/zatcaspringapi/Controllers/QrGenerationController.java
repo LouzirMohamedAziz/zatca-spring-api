@@ -13,7 +13,7 @@ import com.zatca.invoice.zatcaspringapi.Models.Qr;
 import com.zatca.invoice.zatcaspringapi.Services.QrService;
 
 
-@RequestMapping("/qr")
+@RequestMapping("/generate")
 @RestController
 public class QrGenerationController {
 

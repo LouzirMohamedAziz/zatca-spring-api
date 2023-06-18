@@ -15,7 +15,7 @@ import com.zatca.invoice.zatcaspringapi.Models.Validation;
 import com.zatca.invoice.zatcaspringapi.Services.ValidationService;
 import com.zatca.sdk.service.validation.Result;
 
-@RequestMapping("/validation")
+@RequestMapping("/validate")
 @RestController
 public class InvoiceValidationController {
 

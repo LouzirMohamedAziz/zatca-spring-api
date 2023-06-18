@@ -8,6 +8,7 @@ import javax.xml.transform.TransformerException;
 
 import org.apache.xml.security.c14n.CanonicalizationException;
 import org.apache.xml.security.c14n.InvalidCanonicalizerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
@@ -22,7 +23,7 @@ public class ValidationService {
 
     private final ValidationRepository validationRepository;
 
-
+    @Autowired
     public ValidationService(ValidationRepository validationRepository) {
         this.validationRepository = validationRepository;
     }

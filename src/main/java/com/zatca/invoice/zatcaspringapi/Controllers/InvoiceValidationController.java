@@ -2,7 +2,6 @@ package com.zatca.invoice.zatcaspringapi.Controllers;
 
 
 import org.apache.logging.log4j.core.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +22,6 @@ public class InvoiceValidationController {
     private final ValidationService validationService;
     Logger log;
 
-    @Autowired
     public InvoiceValidationController(ValidationService validationService) {
         this.validationService = validationService;
     }

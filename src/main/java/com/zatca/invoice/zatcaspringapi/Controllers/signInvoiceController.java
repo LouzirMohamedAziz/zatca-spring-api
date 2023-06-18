@@ -2,7 +2,6 @@ package com.zatca.invoice.zatcaspringapi.Controllers;
 
 
 import org.apache.logging.log4j.core.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,6 @@ public class SignInvoiceController {
     private final InvoiceSignService invoiceSignService;
     Logger log;
 
-    @Autowired
     public SignInvoiceController(InvoiceSignService invoiceSignService) {
         this.invoiceSignService = invoiceSignService;
     }

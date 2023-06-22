@@ -1,28 +1,28 @@
-package com.zatca.invoice.zatcaspringapi.Models;
+// package com.zatca.invoice.zatcaspringapi.Models;
 
-import javax.persistence.Entity;
+// import javax.persistence.Entity;
 
-@Entity
-public class RequestData {
+// @Entity
+// public class RequestData {
 
-    private String operation;
+//     private String operation;
     
-    public RequestData() {
-    }
+//     public RequestData() {
+//     }
     
-    public String getOperation() {
-        return operation;
-    }
+//     public String getOperation() {
+//         return operation;
+//     }
     
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
+//     public void setOperation(String operation) {
+//         this.operation = operation;
+//     }
 
     
-    @Override
-    public String toString() {
-        return "RequestData{" +
-                "operation='" + operation + '\'' +
-                '}';
-    }
-}
+//     @Override
+//     public String toString() {
+//         return "RequestData{" +
+//                 "operation='" + operation + '\'' +
+//                 '}';
+//     }
+// }

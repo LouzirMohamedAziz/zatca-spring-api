@@ -1,50 +1,52 @@
-package com.zatca.invoice.zatcaspringapi.Controllers;
+// package com.zatca.invoice.zatcaspringapi.Controllers;
 
 
-import org.apache.logging.log4j.core.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
+// import org.apache.logging.log4j.core.Logger;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.client.HttpClientErrorException;
+// import org.springframework.web.client.HttpServerErrorException;
 
-import com.zatca.invoice.zatcaspringapi.Models.InvoiceRequest;
-import com.zatca.invoice.zatcaspringapi.Services.InvoiceSignService;
+// import com.zatca.invoice.zatcaspringapi.Models.InvoiceRequest;
+// import com.zatca.invoice.zatcaspringapi.Services.InvoiceSignService;
 
-@RequestMapping("/sign")
-@RestController
-public class SignInvoiceController {
+// @RequestMapping("/invoice")
+// @RestController
+// public class SignInvoiceController {
 
-    private final InvoiceSignService invoiceSignService;
-    Logger log;
+//     private final InvoiceSignService invoiceSignService;
+//     Logger log;
 
-    public SignInvoiceController(InvoiceSignService invoiceSignService) {
-        this.invoiceSignService = invoiceSignService;
-    }
-
-
-    @PostMapping()
-    public String signInvoice(@RequestBody InvoiceRequest invoiceRequest){
-        try {
-            invoiceSignService.generateSignedInvoice(invoiceRequest);
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
-            HttpStatus statusCode = e.getStatusCode();
-            String responseBody = e.getResponseBodyAsString();
-            if (statusCode.is4xxClientError()) {
-                log.error("Client error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
-            } else if (statusCode.is5xxServerError()) {
-                log.error("Server error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
-            } else {
-                log.error("HTTP error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
-            }
-        } catch (Exception e) {
-            log.error("An unexpected error occurred during signInvoice", e);
-        }
-        return "Invoice signed successfully!";
-    }
+//     public SignInvoiceController(InvoiceSignService invoiceSignService) {
+//         this.invoiceSignService = invoiceSignService;
+//     }
 
 
+//     @PostMapping()
+//     public String signInvoice(@RequestBody InvoiceRequest invoiceRequest,
+//                                 @RequestParam(value="sign",required=true,defaultValue="sign") String signParam){
+//         try {
+//             invoiceSignService.generateSignedInvoice(invoiceRequest);
+//         } catch (HttpClientErrorException | HttpServerErrorException e) {
+//             HttpStatus statusCode = e.getStatusCode();
+//             String responseBody = e.getResponseBodyAsString();
+//             if (statusCode.is4xxClientError()) {
+//                 log.error("Client error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+//             } else if (statusCode.is5xxServerError()) {
+//                 log.error("Server error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+//             } else {
+//                 log.error("HTTP error occurred. Status Code: {}, Response: {}", statusCode, responseBody);
+//             }
+//         } catch (Exception e) {
+//             log.error("An unexpected error occurred during signInvoice", e);
+//         }
+//         return "Invoice signed successfully!";
+//     }
 
-}
+
+
+// }

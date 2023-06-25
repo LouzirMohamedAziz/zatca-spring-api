@@ -1,7 +1,7 @@
 version: '3'
 services:
   nexus:
-    image: sonatype/nexus3:3.30.1
+    image: klo2k/nexus3
     container_name: nexus
     ports:
       - 8081:8081
@@ -26,6 +26,7 @@ services:
     container_name: zatca-spring-api
     ports:
       - 8082:8082
+      - 9092:9092
     restart: always
 
 volumes:

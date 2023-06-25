@@ -6,11 +6,11 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.12</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>com.zatca.invoice</groupId>
 	<artifactId>zatca-spring-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-release</version>
 	<name>zatca-spring-api</name>
 	<description>Spring boot API built to interact with ZATCA SDK</description>
 
@@ -55,6 +55,19 @@
 			<version>3.0.2</version>
 		</dependency>
 	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>maven-releases</name>
+			<url>http://localhost:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>maven-snapshots</name>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<plugins>

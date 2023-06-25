@@ -1,0 +1,1 @@
+java -Xrunjdmp:transport=dt_socket,server=8000,suspend=n -jar 

@@ -23,14 +23,14 @@ import com.zatca.sdk.service.validation.Result;
 
 @RestController
 @RequestMapping("/invoice")
-public class FacadeController {
+public class InvoiceController {
 
     private final InvoiceSignService invoiceSignService;
     private final QrService qrService;
     private final ValidationService validationService;
     Logger log;
 
-    public FacadeController(InvoiceSignService invoiceSignService, QrService qrService, ValidationService validationService) {
+    public InvoiceController(InvoiceSignService invoiceSignService, QrService qrService, ValidationService validationService) {
         this.invoiceSignService = invoiceSignService;
         this.qrService = qrService;
         this.validationService = validationService;

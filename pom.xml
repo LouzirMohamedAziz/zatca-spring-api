@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.zatca.invoice</groupId>
     <artifactId>zatca-spring-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-snapshot</version>
     <name>zatca-spring-api</name>
     <description>Spring boot API built to interact with ZATCA SDK</description>
 

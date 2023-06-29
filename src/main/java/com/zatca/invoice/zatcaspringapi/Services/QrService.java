@@ -20,12 +20,14 @@ public class QrService {
     }
 
     public Qr generateQRCODE(Qr qr) {
+        String baseDir = System.getProperty("user.dir");
+        String invoiceFilePath = baseDir + "/lib/zatca-einvoicing-sdk-234-R3.2.0/signedInvoice.xml";
         qrRepository.save(qr);
         GeneratorTemplate generateService = new QrGenerationService();
         ApplicationPropertyDto configuration = new ApplicationPropertyDto();
         configuration.setGenerateQr(true);
         configuration.setInvoiceFileName(qr.getSignedInvoiceFilePath());
-        configuration.setOutputInvoiceFileName("/Users/louzir/Pictures/zatca-spring-api/lib/zatca-einvoicing-sdk-234-R3.2.0/SignedInvoice.xml");
+        configuration.setOutputInvoiceFileName(invoiceFilePath);
         generateService.generate(configuration);
         return qrRepository.save(qr);
 

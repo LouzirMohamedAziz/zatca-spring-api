@@ -30,6 +30,12 @@ public class InvoiceRequest {
         this.signedInvoiceName = signedInvoiceName;
     }
 
+    public InvoiceRequest(String invoicePath, String invoiceName, String signedInvoiceName) {
+        this.invoicePath = invoicePath;
+        this.invoiceName = invoiceName;
+        this.signedInvoiceName = signedInvoiceName;
+    }
+
     public int getInvoiceSignId() {
         return this.invoiceSignId;
     }

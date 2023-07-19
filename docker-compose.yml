@@ -29,6 +29,8 @@ services:
     ports:
       - 8082:8082
       - 9092:9092
+    environment:
+      - DATABASE_SERVER=jdbc:h2:mem:invoicedb
     restart: always
 
 volumes:

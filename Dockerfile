@@ -3,9 +3,12 @@ VOLUME /tmp
 EXPOSE 8082
 
 # My Application JAR
-ARG JAR_FILE=target/zatca-spring-api-0.0.1-snapshot.jar
-COPY ${JAR_FILE} /app/zatca-spring-api-0.0.1-snapshot.jar
+COPY target/zatca-spring-api-0.0.1-snapshot.jar lib/zatca-spring-api-0.0.1-snapshot.jar
+# Copy the ZATCA SDK Folder
+COPY lib/zatca-einvoicing-sdk-234-R3.2.0 lib/zatca-einvoicing-sdk-234-R3.2.0
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN apt-get update && apt-get install -y jq
+RUN cd lib/zatca-einvoicing-sdk-234-R3.2.0 && ./install.sh
+RUN . ~/.bash-profile && cd lib/zatca-einvoicing-sdk-234-R3.2.0/Data/Input && fatoora -csr -csrconfig csr-config-example-EN.properties
 
-# Copy the ZATCA SDK JAR from local Maven repository
-COPY /lib/zatca-einvoicing-sdk-234-R3.2.0/Apps/zatca-einvoicing-sdk-234-R3.2.0.jar /app/zatca-einvoicing-sdk-234-R3.2.0.jar
-ENTRYPOINT ["java","-jar","/zatca-spring-api-0.0.1-snapshot.jar"]
+CMD ["java","-jar","lib/zatca-spring-api-0.0.1-snapshot.jar"]

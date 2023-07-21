@@ -25,34 +25,45 @@ import com.zatca.sdk.service.validation.Result;
 public class InvoiceSignService {
 
     private final InvoiceRequestRepository invoiceRequestRepository;
+    String baseDir = System.getProperty("user.dir");
 
     @Autowired
     public InvoiceSignService(InvoiceRequestRepository invoiceRequestRepository) {
         this.invoiceRequestRepository = invoiceRequestRepository;
     }
 
+    public static String modifyBaseDir(String baseDir) {
+        if (baseDir.contains("lib")) {
+            return "";
+        } else {
+            return baseDir;
+        }
+    }
     public Result generateSignedInvoice(InvoiceRequest invoiceRequest){
 
         // Signing the Invoice
         GeneratorTemplate generateService = new InvoiceSigningService();
         ApplicationPropertyDto configuration = new ApplicationPropertyDto();
         configuration.setGenerateSignature(true);
+        System.out.println("Loading and Signing the following Invoice: "+invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getInvoiceName()));
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getInvoiceName()));
+        System.out.println("Generating Signed Invoice:  "+invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getSignedInvoiceName()));
         configuration.setOutputInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getSignedInvoiceName()));
         generateService.generate(configuration);
+        System.out.println("Signed Invoice Generated Successfuly! ");
 
         // Generating QR Code
-        String baseDir = System.getProperty("user.dir");
-        String invoiceFilePath = baseDir + "/lib/zatca-einvoicing-sdk-234-R3.2.0/signedInvoice.xml";
+        String signedInvoiceFilePath = invoiceRequest.getInvoicePath().concat("/").concat(invoiceRequest.getSignedInvoiceName());
+        System.out.println("Signed Invoice File Path: "+signedInvoiceFilePath);
         configuration.setGenerateQr(true);
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath()+invoiceRequest.getInvoiceName());
-        configuration.setOutputInvoiceFileName(invoiceFilePath);
+        configuration.setOutputInvoiceFileName(signedInvoiceFilePath);
         generateService.generate(configuration);
         invoiceRequestRepository.save(invoiceRequest);
 
-        // Validation the Invoice
+        // Validate the Invoice
         FileLoader fileLoader = new FileLoader();
-        File file = fileLoader.loadFile(invoiceFilePath);
+        File file = fileLoader.loadFile(signedInvoiceFilePath);
         ValidationProcessorImpl validationProcessorImpl = new ValidationProcessorImpl();
         try {
             return validationProcessorImpl.run(file);

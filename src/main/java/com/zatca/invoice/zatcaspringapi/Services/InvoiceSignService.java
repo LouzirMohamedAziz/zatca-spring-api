@@ -39,11 +39,14 @@ public class InvoiceSignService {
             return baseDir;
         }
     }
+    
     public Result generateSignedInvoice(InvoiceRequest invoiceRequest){
 
         // Signing the Invoice
         GeneratorTemplate generateService = new InvoiceSigningService();
         ApplicationPropertyDto configuration = new ApplicationPropertyDto();
+
+        try {
         configuration.setGenerateSignature(true);
         System.out.println("Loading and Signing the following Invoice: "+invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getInvoiceName()));
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getInvoiceName()));
@@ -51,16 +54,25 @@ public class InvoiceSignService {
         configuration.setOutputInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getSignedInvoiceName()));
         generateService.generate(configuration);
         System.out.println("Signed Invoice Generated Successfuly! ");
+        }
+        catch(Exception e){
+            System.out.println("Signing the Invoice Exception: "+e.getMessage());
+        }
 
         // Generating QR Code
         String signedInvoiceFilePath = invoiceRequest.getInvoicePath().concat("/").concat(invoiceRequest.getSignedInvoiceName());
+        try {
         System.out.println("Signed Invoice File Path: "+signedInvoiceFilePath);
         configuration.setGenerateQr(true);
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath()+invoiceRequest.getInvoiceName());
         configuration.setOutputInvoiceFileName(signedInvoiceFilePath);
-        generateService.generate(configuration);
+        //generateService.generate(configuration);
         invoiceRequestRepository.save(invoiceRequest);
-
+        }
+        catch(Exception e){
+            System.out.println("Generate QR Code for Invoice Exception: "+e.getMessage());
+        }
+        
         // Validate the Invoice
         FileLoader fileLoader = new FileLoader();
         File file = fileLoader.loadFile(signedInvoiceFilePath);

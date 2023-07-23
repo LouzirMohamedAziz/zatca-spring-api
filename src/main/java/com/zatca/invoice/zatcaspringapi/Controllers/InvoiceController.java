@@ -30,8 +30,36 @@ public class InvoiceController {
 
     @PostMapping
     public ResponseEntity<Object> signInvoice(@RequestBody InvoiceRequest invoiceRequest) {
-        
+
+        // String concatenatedPath = invoiceRequest.getInvoicePath().concat("/").concat(invoiceRequest.getInvoiceName());
+        // Path path = Paths.get(concatenatedPath);
+
         try {
+            // if(Files.notExists(path)){
+            //     throw new IllegalArgumentException("Path: " + path + " does not exists!");
+            // }
+            // byte[] bom = new byte[3];
+            // try (BufferedReader reader = new BufferedReader(new FileReader(concatenatedPath))) {
+            // System.out.println("This is the first line if the given XML invoice file: "+reader.read());
+            // }
+            // try (BufferedReader reader = new BufferedReader(new FileReader(concatenatedPath))) {
+            //     String line;
+            //     while ((line = reader.readLine()) != null) {
+            //         System.out.println(line);
+            //     }
+            // }
+            // try(InputStream is = new FileInputStream(path.toFile())){
+            //     // read first 3 bytes of a file.
+            //     is.read(bom);
+            //     // BOM encoded as ef bb bf
+            //     String content = new String(Hex.encodeHex(bom));
+            //     if ("efbbbf".equalsIgnoreCase(content)) {
+            //         System.out.println("True, ");
+            //     }
+            //     else {
+            //         System.out.println("False");
+            //     }
+            // }
             Result result = invoiceSignService.generateSignedInvoice(invoiceRequest);
             if(result!=null) {
                 return ResponseEntity.ok(result);

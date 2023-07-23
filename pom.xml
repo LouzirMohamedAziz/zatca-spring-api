@@ -12,7 +12,7 @@
     <artifactId>zatca-spring-api</artifactId>
     <version>0.0.1-snapshot</version>
     <name>zatca-spring-api</name>
-    <description>Spring boot API built to interact with ZATCA SDK</description>
+    <description>Spring boot API built to interact with ZATCA SDK for signing e-invoices</description>
 
     <properties>
         <java.version>11</java.version>
@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -33,11 +38,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -66,7 +66,7 @@
 		</dependency>
     </dependencies>
 
-    <distributionManagement>
+    <!-- <distributionManagement>
         <repository>
             <id>nexus</id>
             <name>zatca-spring-api-release</name>
@@ -77,7 +77,7 @@
             <name>zatca-spring-api-snapshot</name>
             <url>http://localhost:8081/repository/zatca-spring-api-snapshot/</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement> -->
 
     <build>
         <plugins>

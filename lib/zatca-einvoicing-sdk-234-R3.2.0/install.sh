@@ -1,4 +1,5 @@
 
+#!/bin/bash
 export FATOORA_HOME="${PWD}"
 
 export PATH=$PATH:$FATOORA_HOME/Apps/

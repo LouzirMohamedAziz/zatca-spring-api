@@ -36,6 +36,12 @@ services:
     depends_on:
       - postgres-db
     restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "5"
+
 
   postgres-db:
     image: postgres:15

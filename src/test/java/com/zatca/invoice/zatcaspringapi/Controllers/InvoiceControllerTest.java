@@ -85,8 +85,6 @@ public class InvoiceControllerTest {
 
     String signedInvoicePath = baseDir + testInvoicePath + File.separator + "signedInvoice.xml";
     byte[] signedInvoiceContent = Files.readAllBytes(Paths.get(signedInvoicePath));
-    String signedInvoiceContentStr = new String(signedInvoiceContent);
-
     // Parse the XML content
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();

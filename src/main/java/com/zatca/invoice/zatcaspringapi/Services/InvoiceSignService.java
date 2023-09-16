@@ -52,9 +52,7 @@ public class InvoiceSignService {
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getInvoiceName()));
         System.out.println("Generating Signed Invoice:  "+invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getSignedInvoiceName()));
         configuration.setOutputInvoiceFileName(invoiceRequest.getInvoicePath().concat(String.valueOf(File.separatorChar)).concat(invoiceRequest.getSignedInvoiceName()));
-        generateService.generate(configuration);
-        System.out.println("Signed Invoice Generated Successfuly! ");
-        }
+        generateService.generate(configuration);        }
         catch(Exception e){
             System.out.println("Signing the Invoice Exception: "+e.getMessage());
         }
@@ -62,7 +60,6 @@ public class InvoiceSignService {
         // Generating QR Code
         String signedInvoiceFilePath = invoiceRequest.getInvoicePath().concat("/").concat(invoiceRequest.getSignedInvoiceName());
         try {
-        System.out.println("Signed Invoice File Path: "+signedInvoiceFilePath);
         configuration.setGenerateQr(true);
         configuration.setInvoiceFileName(invoiceRequest.getInvoicePath()+invoiceRequest.getInvoiceName());
         configuration.setOutputInvoiceFileName(signedInvoiceFilePath);

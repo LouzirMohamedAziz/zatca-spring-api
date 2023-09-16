@@ -21,4 +21,9 @@ considering the following Body input as an example: **
   "invoiceName": "name_of_the_invoice_.xml",
   "signedInvoiceName": "name_of_the_invoice_signed.xml"
 }
-**NB:** By convention, the folder that is meant to play the role of Input/Output Device is : /lib/zatca-einvoicing-sdk-234-R3.2.0/
+
+**4) within the container the invoice.xml file should be located under : /app/lib/zatca-einvoicing-sdk-234-R3.2.0/
+                          the log file is located under /app/target/
+
+**NB:** By convention, the folder that is meant to play the role of Input/Output Device is : /lib/zatca-einvoicing-sdk-234-R3.2.0/ in host machine
+                                                                                             /app/lib/zatca-einvoicing-sdk-234-R3.2.0/ in container
